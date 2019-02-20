@@ -5,6 +5,8 @@ from matplotlib import pyplot as plt
 from math import isclose
 from builtins import int
 
+ERROR_TOLERANCE = 0.001 # 0.1%, one thousands as error tolerance
+
 def callWithAbsolutePath(pathString):
     findBuildPolygons(pathString)
 
@@ -74,7 +76,7 @@ def findBuildPolygons(inputPath, outputPath):
 
 
                 # if not the entire area of building_limit has been claimed by a split zone, then award it to the adjacent one with largest height
-                if 0.0 < buildLimitRemainingPoly.area: # remaining area is more than nothing
+                if (sumBuildLimitZonesArea * ERROR_TOLERANCE) < buildLimitRemainingPoly.area: # remaining area is more than ERROR_TOLERANCE of total building_limit area
                     largestHeight = -100 # Save the height of the polygon with largest height
                     highestZone = -1 # Save the index of the polygon with the largest height
                     secondHeighest = -1 # Save the index of the second largest in case we accidentally create a MultiPolygon
@@ -108,7 +110,8 @@ def findBuildPolygons(inputPath, outputPath):
                     else:
                         print('Remaining area in building_limit since no adjacent split building_limit was found')
 
-                if 0.0 > buildLimitRemainingPoly.area or sumSplitArea > sumBuildLimitZonesArea: # remaining area is negative, there is overlap on split building_limits
+                # remaining area is negative or there is overlap on split building_limits
+                if 0 > buildLimitRemainingPoly.area or sumSplitArea > sumBuildLimitZonesArea:
                     # Compare the split building_limits and remove overlapping area from zones with lowest height property
                     for zone in range(numSplitAreas):
                         #select one split area, and then loop over every other and remove overlap when the other zone has higher height property
@@ -126,7 +129,7 @@ def findBuildPolygons(inputPath, outputPath):
 
 
             # rel_tol is 0.1% of total area, this might be a bit to high but it was selected to have some room in case of floating point rounding errors
-            if isclose(sumBuildLimitZonesArea, sumSplitArea, rel_tol=(sumBuildLimitZonesArea/1000)):
+            if isclose(sumBuildLimitZonesArea, sumSplitArea, rel_tol=(sumBuildLimitZonesArea * ERROR_TOLERANCE)):
                 outData = indata
                 # Build new JSON keys for split building_limits
                 outData['split_building_limits'] = {}
@@ -143,6 +146,7 @@ def findBuildPolygons(inputPath, outputPath):
 
                 with open(outputPath, 'w') as outFile:
                     json.dump(outData, outFile, indent=2)
+                    print(f'Preprocessor step complete, output can be found at: {outputPath}')
             else:
                 print('Difference in covered area is too large, could not conclusively create split building limit zones')
 

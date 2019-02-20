@@ -1,0 +1,93 @@
+{
+ "building_limits": {
+   "type": "FeatureCollection",
+   "features": [
+     {
+       "geometry": {
+         "coordinates": [
+           [
+             [-1.0,  1.0],
+             [1.0,   1.0],
+             [1.0,  -1.0],
+             [-1.0, -1.0],
+             [-1.0,  1.0]
+           ]
+         ],
+         "type": "Polygon"
+       },
+       "properties": {},
+       "type": "Feature"
+     },
+	 {
+       "geometry": {
+         "coordinates": [
+           [
+             [-2.0,  2.0],
+             [-1.0,  1.0],
+             [-0.5, -0.5],
+             [-2.0,  0.0],
+             [-2.0,  2.0]
+           ]
+         ],
+         "type": "Polygon"
+       },
+       "properties": {},
+       "type": "Feature"
+     }
+   ]
+ },
+ "height_plateaus": {
+   "type": "FeatureCollection",
+   "features": [
+     {
+       "geometry": {
+         "coordinates": [
+           [
+             [-1.5, 0.0],
+             [-1.5, 2.0],
+             [2.0,  2.0],
+             [2.0,  0.0],
+             [-1.5, 0.0]
+           ]
+         ],
+         "type": "Polygon"
+       },
+       "properties": { "elevation": 100 },
+       "type": "Feature"
+     },
+     {
+       "geometry": {
+         "coordinates": [
+           [
+             [-1.5, -2.0],
+             [-1.5,  0.0],
+             [0.75,  0.0],
+             [0.75, -2.0],
+             [-1.5, -2.0]
+           ]
+         ],
+         "type": "Polygon"
+       },
+       "properties": { "elevation": 50 },
+       "type": "Feature"
+     },
+     {
+       "geometry": {
+         "coordinates": [
+           [
+             [-3.0, -2.5],
+             [-3.0,  5.0],
+             [-1.5,  2.0],
+             [-1.5, -2.0],
+             [-2.0, -1.0],
+             [-3.0, -2.5]
+           ]
+         ],
+         "type": "Polygon"
+       },
+       "properties": { "elevation": 70 },
+       "type": "Feature"
+     }
+   ]
+ }
+}

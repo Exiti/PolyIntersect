@@ -9,6 +9,7 @@ AbstractTextEditor.Color.SelectionForeground=224,224,224
 AbstractTextEditor.Color.SelectionForeground.SystemDefault=false
 PHPReadOccurrenceIndicationColor=128,0,255
 PHPWriteOccurrenceIndicationColor=128,0,255
+SET_FIND_REPLACE_INCREMENTAL_FIRST_TIME=true
 abstractMethod_COLOR=190,214,255
 abstractMethod_STYLE=0
 annotation_COLOR=255,255,255
